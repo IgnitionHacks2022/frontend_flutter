@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                 controller: nameController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'User Name',
+                  labelText: 'Email',
                 ),
               ),
             ),
@@ -105,6 +105,117 @@ class _HomePageState extends State<HomePage> {
                           Text('Don\'t have an account?',
                               style: TextStyle(color:Colors.green)),
                           onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RegisterPage()),
+                              );
+
+                          }
+                          
+                    
+                      ),
+                      TextButton(child: 
+                          Text('Forgot Password',
+                              style: TextStyle(color:Colors.green)),
+                          onPressed: (){
+                          }
+                      )
+
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+            )
+          ],
+          ))
+      ),
+    );
+  }
+}
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({ Key? key }) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+          child: Padding(
+        padding: const EdgeInsets.fromLTRB(10,10,10,10),
+        child: ListView(
+          children: <Widget>[
+            Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.fromLTRB(0,200,0,120),
+                child: const Text(
+                  'InDaBin',
+                  style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 30),
+                )),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Name',
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                ),
+              ),
+            ),
+
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: TextField(
+                obscureText: true,
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
+              ),
+            ),
+            SizedBox(height: 50),
+            Container(
+                height: 50,
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                child: ElevatedButton(
+                  child: const Text('Register'),
+                  onPressed: () {
+                    print(nameController.text);
+                    print(passwordController.text);
+                  },
+                )
+            ),
+            Padding(
+                padding: EdgeInsets.fromLTRB(20,0,30,0),
+                child:
+                Row(
+
+                  children: <Widget>[
+                      TextButton(
+                          child: 
+                          Text('Already have an account?',
+                              style: TextStyle(color:Colors.green)),
+                          onPressed: (){
+                              Navigator.pop(context);
 
                           }
                           
