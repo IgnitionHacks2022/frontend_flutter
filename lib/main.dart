@@ -91,9 +91,9 @@ class _HomePageState extends State<HomePage> {
                 child: ElevatedButton(
                   child: const Text('Login'),
                   onPressed: () {
-                      login(emailController.text, passwordController.text).then((value){
+                      login(emailController.text, passwordController.text).then((session){
                           Navigator.push(context, MaterialPageRoute(builder: 
-                                  (context) => Dashboard()));
+                                  (context) => Dashboard(session: session)));
                       }
                       );
                     print(emailController.text);
@@ -206,11 +206,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: ElevatedButton(
                   child: const Text('Register'),
                   onPressed: () {
-                      register(emailController.text, passwordController.text, nameController.text).then((value){
-                          Navigator.push(context, MaterialPageRoute(builder: 
-                                  (context) => Dashboard()));
-                      }
-                      );
+                      register(emailController.text, passwordController.text, nameController.text).then(
+                          (session){
+                              Navigator.push(context, MaterialPageRoute(builder: 
+                                  (context) => Dashboard(session: session)));
+                          });
 
 
                     print(nameController.text);
