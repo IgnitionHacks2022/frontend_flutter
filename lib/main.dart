@@ -13,6 +13,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
       title: 'InDaBin',
       theme: ThemeData(
         primarySwatch: Colors.green,
@@ -55,16 +56,23 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(0,200,0,200),
+                padding: const EdgeInsets.fromLTRB(0,120,0,30),
                 child: const Text(
                   'InDaBin',
                   style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.w500,
-                      fontSize: 30),
+                      fontSize: 48),
                 )),
+            SizedBox(
+                height:250,
+                width:250,
+                child:
+            CircleAvatar(backgroundImage:AssetImage('assets/IDB-logos.jpeg')),
+            ),
+
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.fromLTRB(10,30,10,10),
               child: TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
@@ -92,8 +100,11 @@ class _HomePageState extends State<HomePage> {
                   child: const Text('Login'),
                   onPressed: () {
                       login(emailController.text, passwordController.text).then((session){
+                          if(session.token!=""){
+
                           Navigator.push(context, MaterialPageRoute(builder: 
                                   (context) => Dashboard(session: session)));
+                          }
                       }
                       );
                     print(emailController.text);
@@ -149,6 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
     TextEditingController nameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController emailController = TextEditingController();
+    TextEditingController blueController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,13 +171,13 @@ class _RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(0,200,0,120),
+                padding: const EdgeInsets.fromLTRB(0,150,0,120),
                 child: const Text(
                   'InDaBin',
                   style: TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.w500,
-                      fontSize: 30),
+                      fontSize: 48),
                 )),
             Container(
               padding: const EdgeInsets.all(10),
@@ -199,14 +211,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: TextField(
+                controller: blueController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Bluetooth Name',
+                ),
+              ),
+            ),
+
+            SizedBox(height: 40),
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                 child: ElevatedButton(
                   child: const Text('Register'),
                   onPressed: () {
-                      register(emailController.text, passwordController.text, nameController.text).then(
+                      register(emailController.text, passwordController.text, nameController.text, blueController.text).then(
                           (session){
                               Navigator.push(context, MaterialPageRoute(builder: 
                                   (context) => Dashboard(session: session)));

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'reqs.dart';
 import 'main.dart';
+import 'chart.dart';
 
 class Dashboard extends StatefulWidget{
     final Session session;
@@ -23,8 +24,23 @@ class _DashboardState extends State<Dashboard> {
               }
           ),
       ),
-      body: const Center(
-        child: Text('My Page!'),
+      body: Center(
+          child: FutureBuilder<List<GarbageItem>>(
+              future: statistics(widget.session.token),
+              builder:(BuildContext context, AsyncSnapshot<List<GarbageItem>> snapshot){
+                  if(snapshot.hasData&&snapshot.data!=null){
+                      return LineChartWidget(items:snapshot.data!);
+                  }else{
+                      return SizedBox(
+                          width: 60,
+                          height:60,
+                          child: CircularProgressIndicator()
+                      );
+                  }
+
+
+              }
+          )
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -44,12 +60,12 @@ class _DashboardState extends State<Dashboard> {
               child: Stack(
   children: <Widget>[
     Card(
-      margin: const EdgeInsets.only(top: 210),
+      margin: EdgeInsets.only(top: 210),
       child: SizedBox(
           height: 50,
           width: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: EdgeInsets.only(top: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
