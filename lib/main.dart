@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'reqs.dart';
+import 'dashboard.dart';
 
 void main() {
   runApp(const App());
@@ -39,7 +41,7 @@ class HomePage extends StatefulWidget {
 
 //TODO paper ball toss background
 class _HomePageState extends State<HomePage> {
-    TextEditingController nameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
 
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.all(10),
               child: TextField(
-                controller: nameController,
+                controller: emailController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
@@ -89,7 +91,12 @@ class _HomePageState extends State<HomePage> {
                 child: ElevatedButton(
                   child: const Text('Login'),
                   onPressed: () {
-                    print(nameController.text);
+                      login(emailController.text, passwordController.text).then((value){
+                          Navigator.push(context, MaterialPageRoute(builder: 
+                                  (context) => Dashboard()));
+                      }
+                      );
+                    print(emailController.text);
                     print(passwordController.text);
                   },
                 )
@@ -199,6 +206,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: ElevatedButton(
                   child: const Text('Register'),
                   onPressed: () {
+                      register(emailController.text, passwordController.text, nameController.text).then((value){
+                          Navigator.push(context, MaterialPageRoute(builder: 
+                                  (context) => Dashboard()));
+                      }
+                      );
+
+
                     print(nameController.text);
                     print(passwordController.text);
                   },
