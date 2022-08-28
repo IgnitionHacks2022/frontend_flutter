@@ -5,7 +5,8 @@ class Session{
     String token;
     String name;
     String email;
-    Session({this.token="",this.name="",this.email=""});
+    String bluetoothId;
+    Session({this.token="",this.name="",this.email="",this.bluetoothId="Nithin's Iphone"});
 }
 Future<Session> login(String email,String password) async{
   Map<String, String> headers = {"Content-type": "application/json"};
